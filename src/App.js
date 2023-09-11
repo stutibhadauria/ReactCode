@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useRef, useState} from 'react'
 import {Route,Routes} from 'react-router-dom'
 import Home from './component/Home'
 import Footer from './component/layouts/Footer'
@@ -33,6 +33,12 @@ import SendDataChild from './component/Hooks/SendDataChild'
 import UseMemo from './component/Hooks/UseMemo'
 import UseRef from './component/Hooks/UseRef'
 import ForwardRef from './component/Hooks/ForwardRef'
+import Display from './component/Curd/Display'
+import User1 from './component/Curd/User1'
+import ControlComponent from './component/Hooks/ControlComponent'
+import UnControlComponent from './component/Hooks/UnControlComponent'
+import UseCallBack from './component/Hooks/UseCallBack'
+import UseReducer from './component/Hooks/UseReducer'
 
 function App() {
   const[data,setData]=useState('dishu')
@@ -52,6 +58,13 @@ function App() {
 
   function parent(data){
     alert(data.name)
+  }
+
+  let inputRef=useRef()
+  function updateinput(){
+    inputRef.current.value='1000'
+    inputRef.current.style.color='red'
+    inputRef.current.style.background='pink'
   }
   return (
     <>
@@ -88,7 +101,13 @@ function App() {
        <Route path='/parent' element={<SendDataChild alert={parent}/>}/>
        <Route path='/memo' element={<UseMemo/>}/>
        <Route path='/ref' element={<UseRef/>}/>
-       <Route path='/forward' element={<ForwardRef/>}/>
+       <Route path='/forward' element={<ForwardRef ref={inputRef}/>}/>
+       <Route path='/user1' element={<User1/>}/>
+       <Route path='/display' element={<Display/>}/>
+       <Route path='/control' element={<ControlComponent/>}/>
+       <Route path='/uncontrol' element={<UnControlComponent/>}/>
+       <Route path='/usecall' element={<UseCallBack/>}/>
+       <Route path='/usereducer' element={<UseReducer/>}/>
     </Routes>
     <Footer/>
     {/* {
@@ -99,6 +118,7 @@ function App() {
     } */}
     
     {/* <button onClick={()=>setData('ram')}>Click me</button> */}
+    {/* <button onClick={updateinput}>update input box</button> */}
     </>
   )
 }
